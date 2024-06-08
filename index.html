@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blooket Host Lobby</title>
+    <style>
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px) scaleX(1.1) scaleY(0.9);
+            }
+        }
+        @keyframes stretch {
+            0%, 100% {
+                transform: scaleX(1) scaleY(1);
+            }
+            50% {
+                transform: scaleX(1.2) scaleY(0.8);
+            }
+        }
+        @keyframes squeeze {
+            0%, 100% {
+                transform: scaleX(1) scaleY(1);
+            }
+            50% {
+                transform: scaleX(0.9) scaleY(1.1);
+            }
+        }
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #62cdd4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .logo-container {
+            margin-bottom: 20px;
+            animation: bounce 0.67s infinite, stretch 0.67s infinite alternate, squeeze 0.67s infinite;
+        }
+        .lobby-container {
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #9369d7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header .game-code {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .header .description {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .qr-code {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-align: center;
+        }
+        .qr-code img {
+            width: 100px;
+            height: 100px;
+        }
+        .qr-code div {
+            background: orange;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .header .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .header .controls button {
+            background-color: #ff5722;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .header .controls button:hover {
+            background-color: #e64a19;
+        }
+        .main-content {
+            background-color: #62cdd4;
+            padding: 20px;
+            text-align: center;
+        }
+        .main-content .player-count {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .main-content .start-button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .main-content .start-button:hover {
+            background-color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="bluekit testing/bluekit2logo.png" alt="Blooket" class="logo">
+    </div>
+    <div class="lobby-container">
+        <div class="header">
+            <div class="qr-code">
+                <img src="https://via.placeholder.com/100" alt="QR Code">
+                <div>QR Code for easy scanning</div>
+            </div>
+            <div class="description">Go to <a href="NO LINK YET" style="color: #ffeb3b;">play.blooket.com</a> and enter Game ID:</div>
+            <div class="game-code" id="gameCode">2254857</div>
+            <div class="controls">
+                <button id="muteButton">Mute Music</button>
+                <button>Full Screen</button>
+                <button>Copy Link</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="player-count">0 Players</div>
+            <button class="start-button">1 More</button>
+        </div>
+    </div>
+    <!-- Update the src attribute to your WAV file -->
+    <audio id="backgroundMusic" src="bluekit testing/bluekitmaintheme.wav" autoplay loop></audio>
+    <script>
+        function generateGameCode() {
+            const min = 1000000;
+            const max = 9999999;
+            const gameCode = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById('gameCode').textContent = gameCode;
+        }
+
+        window.onload = generateGameCode;
+
+        document.getElementById('muteButton').addEventListener('click', function() {
+            const music = document.getElementById('backgroundMusic');
+            if (music.muted) {
+                music.muted = false;
+                this.textContent = 'Mute Music';
+            } else {
+                music.muted = true;
+                this.textContent = 'Unmute Music';
+            }
+        });
+    </script>
+</body>
+</html>
